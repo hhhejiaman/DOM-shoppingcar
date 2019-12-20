@@ -45,14 +45,14 @@ window.onload = function() {
     var container = document.getElementById("container");
     var h1 = document.createElement("h1");
     h1.innerHTML = "文具店购物车";
-    var table = document.createElement("table");
-    var thead = document.createElement("thead");
-    var tbody = document.createElement("tbody");
+    var shopTable = document.createElement("table");
+    var shopThead = document.createElement("thead");
+    var shopTbody = document.createElement("tbody");
 
     container.appendChild(h1);
-    container.appendChild(table);
-    table.appendChild(thead);
-    table.appendChild(tbody);
+    container.appendChild(shopTable);
+    shopTable.appendChild(shopThead);
+    shopTable.appendChild(shopTbody);
     //表头部分
     var html = "";
     html += "<tr>";
@@ -62,7 +62,7 @@ window.onload = function() {
     html += "<th>" + "商品数量" + "</th>";
     html += "<th>" + "总价（￥）" + "</th>";
     html += "</tr>";
-    thead.innerHTML = html;
+    shopThead.innerHTML = html;
 
     //表格末尾
     var trTotal = document.createElement("tr");
@@ -71,7 +71,7 @@ window.onload = function() {
     totalCheck.setAttribute("id", "totalCheck");
     totalCheck.setAttribute("type", "checkbox");
     totalCheck.checked = false;
-    tbody.appendChild(trTotal);
+    shopTbody.appendChild(trTotal);
     trTotal.appendChild(tdCheckAll);
     tdCheckAll.appendChild(totalCheck);
 
@@ -100,7 +100,7 @@ window.onload = function() {
 
     function caculator(event) {
         var shoptr = document.createElement("tr");
-        tbody.insertBefore(shoptr, trTotal);
+        shopTbody.insertBefore(shoptr, trTotal);
         //复选框
         var tdCheck = document.createElement("td");
         var checkBox = document.createElement("input");
@@ -175,7 +175,7 @@ window.onload = function() {
                 event.count--;
                 count.innerHTML = event.count;
             } else {
-                tbody.removeChild(tr);
+                shopTbody.removeChild(shoptr);
             }
 
         }
@@ -195,7 +195,6 @@ window.onload = function() {
                 let sumNow = document.getElementsByClassName("sum")[i];
                 let countNow = document.getElementsByClassName("count")[i];
                 let chooseNow = document.getElementsByClassName("checkbox")[i];
-                console.log(chooseNow);
                 if (chooseNow.checked) {
                     numberEnd += Number(countNow.innerHTML);
                     priceEnd += Number(sumNow.innerHTML);
