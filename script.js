@@ -199,10 +199,11 @@ window.onload = function() {
                 if (chooseNow.checked) {
                     numberEnd += Number(countNow.innerHTML);
                     priceEnd += Number(sumNow.innerHTML);
-                    resultCountNow.innerHTML = numberEnd;
-                    resultPriceNow.innerHTML = priceEnd + "￥";
                 }
+                resultCountNow.innerHTML = numberEnd;
+                resultPriceNow.innerHTML = priceEnd + "￥";
             }
+
         }
 
         function checkResult() {
