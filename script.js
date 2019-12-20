@@ -99,8 +99,8 @@ window.onload = function() {
     }
 
     function caculator(event) {
-        var tr = document.createElement("tr");
-        tbody.insertBefore(tr, trTotal);
+        var shoptr = document.createElement("tr");
+        tbody.insertBefore(shoptr, trTotal);
         //复选框
         var tdCheck = document.createElement("td");
         var checkBox = document.createElement("input");
@@ -108,19 +108,19 @@ window.onload = function() {
         checkBox.setAttribute("type", "checkbox");
         checkBox.checked = event.checked;
         tdCheck.appendChild(checkBox);
-        tr.appendChild(tdCheck);
+        shoptr.appendChild(tdCheck);
         //商品名
         var tdName = document.createElement("td");
         var tradeName = document.createElement("span");
         tradeName.innerHTML = event.name;
         tdName.appendChild(tradeName);
-        tr.appendChild(tdName);
+        shoptr.appendChild(tdName);
         //单价
         var tdPrice = document.createElement("td");
         var unitPrice = document.createElement("span");
         unitPrice.innerHTML = event.price;
         tdPrice.appendChild(unitPrice);
-        tr.appendChild(tdPrice);
+        shoptr.appendChild(tdPrice);
         //数量
         var tdCount = document.createElement("td");
         var reduceBtn = document.createElement("button");
@@ -134,14 +134,14 @@ window.onload = function() {
         tdCount.appendChild(reduceBtn);
         tdCount.appendChild(count);
         tdCount.appendChild(addBtn);
-        tr.appendChild(tdCount);
+        shoptr.appendChild(tdCount);
         //总价
         var tdTotal = document.createElement("td");
         var totalPrice = document.createElement("span");
         totalPrice.setAttribute("class", "sum");
         totalPrice.innerHTML = Number(event.price) * Number(event.count);
         tdTotal.appendChild(totalPrice);
-        tr.appendChild(tdTotal);
+        shoptr.appendChild(tdTotal);
 
         addBtn.addEventListener("click", function() {
             add();
