@@ -6,56 +6,10 @@
     <title>DOM-shoppingCar</title>
     <link href="style.css" rel="stylesheet">
     <script src="script.js"></script>
-
 </head>
 
 <body>
-    <div id="container">
-        <h1>文具店购物车</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>选择</th>
-                    <th>商品名称</th>
-                    <th>商品单价（￥）</th>
-                    <th>商品数量</th>
-                    <th>总价（￥）</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="checkbox" id="pencheck"></td>
-                    <td>英雄牌 钢笔</td>
-                    <td><span>69</span></td>
-                    <td>
-                        <input type="button" value="-">
-                        <span>1</span>
-                        <input type="button" value="+">
-                    </td>
-                    <td>
-                        <span id="pentotal">69</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="checkcacu" checked="checked" onclick="clickcacu()"></td>
-                    <td>晨光牌 铅字笔</td>
-                    <td><span>5.5</span></td>
-                    <td>
-                        <input type="button" value="-">
-                        <span>2</span>
-                        <input type="button" value="+">
-                    </td>
-                    <td>
-                        <span id="penciltotal">11</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>全选<input type="checkbox" id="allcheck"></td>
-                    <td id="resultbox" colspan="4">共计<span>2</span>件商品，<span>0</span>￥</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <div id="container"></div>
 </body>
 
 </html>

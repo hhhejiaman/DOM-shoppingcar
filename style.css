@@ -18,18 +18,8 @@ td {
     border: 1px solid rgb(168, 163, 163);
 }
 
-th {
-    background-color: rgb(207, 204, 204);
-}
-
-#penaccount {
-    display: inline-block;
-    width: 20px;
+.count {
+    width: 15px;
+    text-align: center;
     border: none;
-    margin-left: 8px;
-}
-
-#resultbox {
-    text-align: right;
-    padding-right: 10px;
 }
