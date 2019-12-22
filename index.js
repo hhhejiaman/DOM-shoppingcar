@@ -171,7 +171,7 @@ window.onload = function() {
         }
 
         function reduce() {
-            if (event.count > 0) {
+            if (event.count > 1) {
                 event.count--;
                 count.innerHTML = event.count;
             } else {
