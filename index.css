@@ -18,8 +18,6 @@ td {
     border: 1px solid rgb(168, 163, 163);
 }
 
-.count {
-    width: 15px;
-    text-align: center;
-    border: none;
+.goods-count {
+    margin: 0px 5px 0px 5px;
 }
