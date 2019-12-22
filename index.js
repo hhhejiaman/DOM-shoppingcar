@@ -42,107 +42,47 @@ window.onload = function() {
             "checked": false
         }
     ]
-    var container = document.getElementById("container");
-    var h1 = document.createElement("h1");
-    h1.innerHTML = "文具店购物车";
-    var shopTable = document.createElement("table");
-    var shopThead = document.createElement("thead");
-    var shopTbody = document.createElement("tbody");
-
-    container.appendChild(h1);
-    container.appendChild(shopTable);
-    shopTable.appendChild(shopThead);
-    shopTable.appendChild(shopTbody);
-    //表头部分
+    var tbody = document.getElementById("tbody");
     var html = "";
-    html += "<tr>";
-    html += "<th>" + "选择" + "</th>";
-    html += "<th>" + "商品名称" + "</th>";
-    html += "<th>" + "商品单价（￥）" + "</th>";
-    html += "<th>" + "商品数量" + "</th>";
-    html += "<th>" + "总价（￥）" + "</th>";
-    html += "</tr>";
-    shopThead.innerHTML = html;
+    addInfos(carProducts);
 
-    //表格末尾
-    var trTotal = document.createElement("tr");
-    var tdCheckAll = document.createElement("td");
-    var totalCheck = document.createElement("input");
-    totalCheck.setAttribute("id", "totalCheck");
-    totalCheck.setAttribute("type", "checkbox");
-    totalCheck.checked = false;
-    shopTbody.appendChild(trTotal);
-    trTotal.appendChild(tdCheckAll);
-    tdCheckAll.appendChild(totalCheck);
+    function addInfos(goods) {
+        for (i = 0; i < goods.length; i++) {
+            var name = goods[i].name;
+            var price = goods[i].price;
+            var count = goods[i].count;
+            var totalPrice = price * count;
+            var checked = goods[i].checked ? 'checked' : '';
+            html += "<tr>";
+            html += `<td><input type = 'checkbox' class='goods-checkbox' ${checked}></td>`;
+            html += `<td>${name}</td>`;
+            html += `<td>${price}</td>`;
+            html += `<td><button class='reduce-btn'>-</button><span class='goods-count'>${count}</span><button class='add-btn'>+</button></td>`;
+            html += `<td><span class='goods-price'>${totalPrice}</span></td>`;
+            html += "</tr>";
 
-    var resultBox = document.createElement("td");
-    resultBox.setAttribute("colspan", "4");
-    var resultStr = "";
-    resultStr += "共计";
-    resultBox.innerHTML = resultStr;
-    var resultCount = document.createElement("span");
-    resultCount.setAttribute("id", "resultCount");
-    resultCount.innerHTML = "3";
-    resultBox.appendChild(resultCount);
-    var resultStrLast = document.createTextNode("件商品，");
-    var resultPrice = document.createElement("span");
-    resultPrice.setAttribute("id", "resultPrice");
-    resultPrice.innerHTML = "210" + "￥";
+        }
 
-    resultBox.appendChild(resultStrLast);
-    trTotal.appendChild(resultBox);
-    resultBox.appendChild(resultPrice);
-
-    //tbody部分
-    for (var i = 0; i < carProducts.length; i++) {
-        caculator(carProducts[i]);
+        tbody.innerHTML = html;
+        for (i = 0; i < goods.length; i++) {
+            caculator(goods[i]);
+        }
     }
 
-    function caculator(event) {
-        var shoptr = document.createElement("tr");
-        shopTbody.insertBefore(shoptr, trTotal);
-        //复选框
-        var tdCheck = document.createElement("td");
-        var checkBox = document.createElement("input");
-        checkBox.setAttribute("class", "checkbox");
-        checkBox.setAttribute("type", "checkbox");
-        checkBox.checked = event.checked;
-        tdCheck.appendChild(checkBox);
-        shoptr.appendChild(tdCheck);
-        //商品名
-        var tdName = document.createElement("td");
-        var tradeName = document.createElement("span");
-        tradeName.innerHTML = event.name;
-        tdName.appendChild(tradeName);
-        shoptr.appendChild(tdName);
-        //单价
-        var tdPrice = document.createElement("td");
-        var unitPrice = document.createElement("span");
-        unitPrice.innerHTML = event.price;
-        tdPrice.appendChild(unitPrice);
-        shoptr.appendChild(tdPrice);
-        //数量
-        var tdCount = document.createElement("td");
-        var reduceBtn = document.createElement("button");
-        reduceBtn.innerHTML = "-";
-        var count = document.createElement("span");
-        count.setAttribute("class", "count");
-        count.setAttribute("id", event.id);
-        count.innerHTML = Number(event.count);
-        var addBtn = document.createElement("button");
-        addBtn.innerHTML = "+";
-        tdCount.appendChild(reduceBtn);
-        tdCount.appendChild(count);
-        tdCount.appendChild(addBtn);
-        shoptr.appendChild(tdCount);
-        //总价
-        var tdTotal = document.createElement("td");
-        var totalPrice = document.createElement("span");
-        totalPrice.setAttribute("class", "sum");
-        totalPrice.innerHTML = Number(event.price) * Number(event.count);
-        tdTotal.appendChild(totalPrice);
-        shoptr.appendChild(tdTotal);
 
+
+    function caculator(event) {
+
+        var addBtn = document.getElementsByClassName("add-btn")[i];
+        var reduceBtn = document.getElementsByClassName("reduce-btn")[i];
+        var goodsCount = document.getElementsByClassName("goods-count")[i];
+        var goodsPrice = document.getElementsByClassName("goods-price")[i];
+        var goodsCheckBox = document.getElementsByClassName("goods-checkbox")[i];
+
+        var resultCount = document.getElementById("result-count");
+        var resultPrice = document.getElementById("result-price");
+
+        var totalCheckBtn = document.getElementById("total-check");
         addBtn.addEventListener("click", function() {
             add();
             total();
@@ -153,66 +93,66 @@ window.onload = function() {
             reduce();
             total();
             checkTr();
-        })
-        checkBox.onclick = function() {
-            checkTr();
-        }
-
-        var totalCheckBox = document.getElementById("totalCheck");
-
-        totalCheckBox.addEventListener("click", function() {
-            checkResult();
-            checkTr();
         });
 
         function add() {
             event.count++;
-            count.innerHTML = event.count;
+            goodsCount.innerHTML = event.count;
         }
 
         function reduce() {
             if (event.count > 1) {
                 event.count--;
-                count.innerHTML = event.count;
+                goodsCount.innerHTML = event.count;
             } else {
-                shopTbody.removeChild(shoptr);
+                reduceBtn.parentNode.parentNode.parentNode.removeChild(reduceBtn.parentNode.parentNode);
             }
-
         }
 
         function total() {
-            totalPrice.innerHTML = Number(event.price) * Number(event.count);
+            goodsPrice.innerHTML = event.count * event.price;
         }
+
+        goodsCheckBox.addEventListener("click", function() {
+            checkTr();
+        })
+
+        var trNow = document.getElementsByTagName("tr");
 
         function checkTr() {
             let priceEnd = 0;
             let numberEnd = 0;
-            let trNow = document.getElementsByTagName("tr");
 
-            let resultCountNow = document.getElementById("resultCount");
-            let resultPriceNow = document.getElementById("resultPrice");
+
+
             for (i = 0; i < trNow.length - 2; i++) {
-                let sumNow = document.getElementsByClassName("sum")[i];
-                let countNow = document.getElementsByClassName("count")[i];
-                let chooseNow = document.getElementsByClassName("checkbox")[i];
-                if (chooseNow.checked) {
+                var checkBoxNow = document.getElementsByClassName("goods-checkbox")[i];
+                var countNow = document.getElementsByClassName("goods-count")[i];
+                var priceNow = document.getElementsByClassName("goods-price")[i];
+                if (checkBoxNow.checked) {
+                    console.log(checkBoxNow)
                     numberEnd += Number(countNow.innerHTML);
-                    priceEnd += Number(sumNow.innerHTML);
+                    priceEnd += Number(priceNow.innerHTML);
                 }
-                resultCountNow.innerHTML = numberEnd;
-                resultPriceNow.innerHTML = priceEnd + "￥";
+                resultCount.innerHTML = numberEnd;
+                resultPrice.innerHTML = priceEnd;
             }
-
         }
 
+        totalCheckBtn.addEventListener("click", function() {
+            checkResult();
+            checkTr();
+        });
+
+
         function checkResult() {
-            let trNow = document.getElementsByTagName("tr");
             for (i = 0; i < trNow.length - 2; i++) {
-                let chooseNow = document.getElementsByClassName("checkbox")[i];
-                chooseNow.checked = totalCheckBox.checked;
+                var checkBoxNow = document.getElementsByClassName("goods-checkbox")[i];
+                checkBoxNow.checked = totalCheckBtn.checked;
             }
         }
     }
+
 
 
 

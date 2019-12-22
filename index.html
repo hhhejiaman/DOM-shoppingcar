@@ -9,7 +9,29 @@
 </head>
 
 <body>
-    <div id="container"></div>
+    <div id="container">
+        <h1>文具店购物车</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>商品名称</th>
+                    <th>商品单价(￥)</th>
+                    <th>商品数量</th>
+                    <th>总价(￥)</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>全选 <input type="checkbox" id="total-check" /></td>
+                    <td colspan="4">共计<span id="result-count">3</span>件商品，<span id="result-price">210</span>￥</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </body>
 
 </html>
